@@ -203,7 +203,11 @@ things that do not matter on the desktop decide here:
    The list is the set of Office domains known to host Excel on the web;
    **check it in your tenant** (browser devtools, the frame chain of the task
    pane) - Microsoft does not publish a fixed list for the add-in iframe's
-   ancestors. The host page itself sets UI5's `frameOptions` to allow;
+   ancestors. `*.sharepoint.com` names every Microsoft 365 tenant, not only
+   yours: replace it with your tenant's hosts (`https://contoso.sharepoint.com
+   https://contoso-my.sharepoint.com`), or a page of any other tenant may
+   frame the task pane - with your users' SAP session, once the cookies are
+   `SameSite=None` (point 2). The host page itself sets UI5's `frameOptions` to allow;
    abap2UI5's own node is not framed - the frontend comes as a script.
    Set the header on the system - see [CSP](#content-security-policy).
 2. **Cookies.** In the iframe the SAP session cookies (`MYSAPSSO2`,
@@ -245,6 +249,9 @@ frame-ancestors 'self' https://*.cloud.microsoft https://*.officeapps.live.com h
 - The page has **no inline script and no inline handler** (CI checks it), so
   `script-src` needs no `'unsafe-inline'`; the abap2UI5 frontend is a script
   of the same origin and evaluates nothing from a string.
+- `frame-ancestors`: replace `*.sharepoint.com` with your tenant's hosts
+  (see [Excel on the web](#excel-on-the-web)) - the wildcard admits every
+  Microsoft 365 tenant.
 - `'unsafe-eval'`: UI5 1.71 needs it (the embed control says so for its
   hosts); a current UI5 does not.
 - UI5 from a CDN instead of the system: add its origin to `script-src`,
