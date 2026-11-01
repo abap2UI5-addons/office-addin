@@ -36,7 +36,7 @@
     "check": "npm run lint && npm run format:check && npm test && npm run bsp:check && npm run abaplint && npm run abaplint:cloud && npm run check:abap2ui5"
   },
   "dependencies": {
-    "@abap2ui5/embed-control": "0.1.1"
+    "@abap2ui5/embed-control": "0.3.0"
   },
   "devDependencies": {
     "@abap2ui5/linter": "^0.8.5",
