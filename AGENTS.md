@@ -155,6 +155,7 @@ npm run e2e:build && npm run e2e
 |---|---|
 | `check-abap.yaml` (`check-abap`) | abaplint Standard, Cloud and 7.02 (downported in CI), the abap2UI5 linter |
 | `check-addin.yaml` (`check-addin`) | ESLint, Prettier, `npm test`, `bsp:check`; a generated manifest through Microsoft's validation service |
+| `publish-702.yaml` / `abap-702.yaml` | on every push to `main`: `npm run auto_downport` writes the downported `702` branch, then `abap-702` lints it - never commit to `702` by hand |
 | `test-e2e.yaml` (`test-e2e`) | The Playwright smoke test, UI5 1.136 and 1.71 |
 
 All three run on pull requests, pushes to `main` and weekly (the lint
