@@ -4,7 +4,7 @@ An example - not tested by CI - for a system that has no BSP applications
 (SAP BTP, ABAP environment) or a landscape that reaches the system through
 an approuter anyway. The approuter serves the host page and forwards the
 abap2UI5 service, so both are on its origin, which is what the add-in
-needs (README, "Same origin").
+needs (README, "How it works").
 
 - `dist/` next to `xs-app.json`: `npm run dist` in the repository root
   writes it (the host page and the embed control).

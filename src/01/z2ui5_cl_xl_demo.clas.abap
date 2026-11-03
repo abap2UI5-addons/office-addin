@@ -63,7 +63,7 @@ CLASS z2ui5_cl_xl_demo IMPLEMENTATION.
 
   METHOD z2ui5_if_app~main.
 
-    " The demo of abap2UI5/office-addin: an abap2UI5 app in the task pane of
+    " The demo of abap2UI5-addons/office-addin: an abap2UI5 app in the task pane of
     " an Excel add-in, talking to the workbook through the frontend's custom
     " control z2ui5.cc.ExcelBridge (abap2UI5 #2847). The control reads its
     " bindings and does what the app asks for as a frontend action on its id:

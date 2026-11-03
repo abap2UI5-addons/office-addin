@@ -6,12 +6,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abap2UI5/office-addin.git"
+    "url": "git+https://github.com/abap2UI5-addons/office-addin.git"
   },
   "bugs": {
-    "url": "https://github.com/abap2UI5/office-addin/issues"
+    "url": "https://github.com/abap2UI5-addons/office-addin/issues"
   },
-  "homepage": "https://github.com/abap2UI5/office-addin#readme",
+  "homepage": "https://github.com/abap2UI5-addons/office-addin#readme",
   "engines": {
     "node": ">=22"
   },
