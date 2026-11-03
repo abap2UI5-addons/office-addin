@@ -189,7 +189,9 @@ gets verified by hand.
   formatted with Prettier (`.prettierrc`); Markdown is not.
 - Node 22 (`.nvmrc`), scripts are ESM `.mjs` in `scripts/`.
 - Actions are pinned to a commit SHA with the version in a trailing comment;
-  Dependabot moves them. Workflows ask for `contents: read` only.
+  `bump-deps.yaml` moves them, with the npm dependencies, once a month in one
+  pull request. Workflows ask for `contents: read` only - except that one,
+  which needs to push its branch and open the pull request.
 - `changelog.txt`: `unreleased` on top, one line per user-visible change.
 - The ecosystem-wide rules live in abap2UI5's
   [CONVENTIONS.md](https://github.com/abap2UI5/abap2UI5/blob/main/.github/shared/CONVENTIONS.md).
