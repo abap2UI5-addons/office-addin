@@ -16,14 +16,6 @@
 // Office.js is not served: it comes from Microsoft's CDN, and the tests
 // answer that URL with test/e2e/office-stub.js.
 //
-// ExcelBridge, until the runtime has it: z2ui5.cc.ExcelBridge is new in
-// abap2UI5 (#2847) and not in the frontend of @abap2ui5/node-runtime
-// 1.146.0. When the bundle does not define the module, UI5 asks for it as a
-// file - resources/z2ui5/cc/ExcelBridge.js - and this server answers with
-// the copy in test/e2e/vendor/ (its header names the commit). With a
-// runtime whose bundle has the control the copy is never asked for, and
-// the server says which of the two the run used.
-//
 //   node test/e2e/server.mjs [--port 4310] [--ui5 1.136|1.71] [--csp]
 //
 // --csp sends the Content-Security-Policy the README recommends for the
@@ -156,15 +148,6 @@ function coreBootstrap() {
   ].join("\n;\n");
 }
 
-const VENDORED_BRIDGE = path.join(
-  ROOT,
-  "test",
-  "e2e",
-  "vendor",
-  "ExcelBridge.js",
-);
-export const bridgeSource = { used: "bundle" };
-
 function serveUi5(req, res) {
   const rel = decodeURIComponent(req.path.replace(/^\/+/, "")).replace(
     /^sap-ui-cachebuster\//,
@@ -173,13 +156,6 @@ function serveUi5(req, res) {
   if (rel === "sap-ui-version.json") return res.json(versionInfo());
   if (rel === "sap-ui-core.js")
     return res.type(MIME[".js"]).send(coreBootstrap());
-  if (rel === "z2ui5/cc/ExcelBridge.js") {
-    bridgeSource.used = "vendored";
-    console.log(
-      "server: z2ui5/cc/ExcelBridge.js is not in the bundle - the vendored copy answers",
-    );
-    return res.type(MIME[".js"]).send(fs.readFileSync(VENDORED_BRIDGE));
-  }
   for (const root of ROOTS) {
     const full = path.join(root, rel);
     if (

@@ -27,11 +27,9 @@ Three things are **not** here and must not be copied in:
 
 - **The control.** `z2ui5.cc.ExcelBridge` is abap2UI5's
   (`app/webapp/cc/ExcelBridge.js`, pull request #2847). A change to what it
-  does is a pull request there (merged into abap2UI5 `main` as bcce7d6, in
-  no release yet); do not work around it in the host page.
-  `test/e2e/vendor/ExcelBridge.js` is a byte copy for the smoke test only
-  (header: source commit), never shipped, never edited - delete it with the
-  bump of `@abap2ui5/node-runtime` to the first release that has the control.
+  does is a pull request there (released with abap2UI5 1.147.0); do not
+  work around it in the host page, and do not vendor a copy for the smoke
+  test - it runs on the bundle of `@abap2ui5/node-runtime`.
 - **The abap2UI5 frontend.** The embed control loads it from the system
   (`<endpoint>?z2ui5-bundle`); nothing here pins or vendors it.
 - **The embed control's source.** `src/02` carries a copy of
@@ -49,11 +47,11 @@ Three things are **not** here and must not be copied in:
 | `scripts/build-bsp.mjs` | `webapp/` + the embed control -> `src/02` (`npm run bsp`, `bsp:check`), or -> `dist/` (`npm run dist`) |
 | `scripts/manifest.mjs` | The manifest generator (`npm run manifest -- --host ...`) |
 | `test/*.test.mjs` | Node tests: the manifest, the BSP format, the host page rules (`npm test`) |
-| `test/e2e/` | The Playwright smoke test: `server.mjs` (one origin like the system: the BSP as delivered, `@abap2ui5/node-runtime` with the demo, UI5 from npm), `office-stub.js`, `addin.spec.mjs`, `build-backend.mjs`, `vendor/` |
+| `test/e2e/` | The Playwright smoke test: `server.mjs` (one origin like the system: the BSP as delivered, `@abap2ui5/node-runtime` with the demo, UI5 from npm), `office-stub.js`, `addin.spec.mjs`, `build-backend.mjs` |
 | `examples/approuter/` | Serving the host page without a BSP - documented, not tested |
 | `abaplint.jsonc`, `.github/abaplint/` | ABAP Standard (v750), ABAP Cloud, 7.02 |
 | `abap2ui5lint.jsonc` | The abap2UI5 linter over `src/01` |
-| `.github/workflows/` | `check-abap.yaml`, `check-addin.yaml`, `test-e2e.yaml` (see "Gates") |
+| `.github/workflows/` | `check-abap.yaml`, `check-addin.yaml`, `test-e2e.yaml`, `abap-702.yaml`, `publish-702.yaml`, `bump-deps.yaml`, `deploy-pages.yaml` (see "Gates") |
 
 ## Rules for the host page (`webapp/`)
 
@@ -158,7 +156,7 @@ npm run e2e:build && npm run e2e
 | `publish-702.yaml` / `abap-702.yaml` | on every push to `main`: `npm run auto_downport` writes the downported `702` branch, then `abap-702` lints it - never commit to `702` by hand |
 | `test-e2e.yaml` (`test-e2e`) | The Playwright smoke test, UI5 1.136 and 1.71 |
 
-All three run on pull requests, pushes to `main` and weekly (the lint
+check-abap, check-addin and test-e2e run on pull requests, pushes to `main` and weekly (the lint
 configs follow abap2UI5 `main` and `702`).
 
 `npm run check` leaves out, as CONVENTIONS §3 asks to name:

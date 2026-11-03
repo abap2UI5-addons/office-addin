@@ -9,10 +9,8 @@
       "files": "/src/**/*.*"
     },
     {
-      // main, declared (CONVENTIONS section 9): the demo needs the abap2UI5
-      // with z2ui5.cc.ExcelBridge (#2847), which no release has yet - its
-      // ABAP uses nothing newer than 1.146.0, so a release tag can replace
-      // this with the first release that ships the control
+      // main, declared (CONVENTIONS section 9); the demo needs z2ui5.cc.ExcelBridge,
+      // released with abap2UI5 1.147.0
       "url": "https://github.com/abap2UI5/abap2UI5",
       "branch": "main",
       "folder": "/.abaplint-deps/abap2UI5",

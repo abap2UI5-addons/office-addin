@@ -34,7 +34,7 @@ An Office add-in that opens an abap2UI5 app in the task pane of Microsoft Excel:
 
 ## Requirements
 
-- abap2UI5 with z2ui5.cc.ExcelBridge (pull request #2847, on main since commit bcce7d6; the first release after 1.146.0 that lists it)
+- abap2UI5 1.147.0 or later (the first release with z2ui5.cc.ExcelBridge)
 - The embed control needs abap2UI5 1.145.0 or later
 - UI5 1.71 or later on the system; theme sap_horizon needs UI5 1.102+, else --theme sap_fiori_3
 - HTTPS with a certificate the users' machines trust
