@@ -11,6 +11,8 @@ This is a **source repository** (abap2UI5 CONVENTIONS §1): you edit here, CI
 checks every change. It holds the host page as a BSP application to pull
 with abapGit, a demo app, the manifest generator and the tests.
 
+> Part of [abap2UI5-addons](https://github.com/abap2UI5-addons) - addons and apps for [abap2UI5](https://github.com/abap2UI5/abap2UI5), installed with [abapGit](https://abapgit.org). Documentation: [abap2ui5-addons.github.io/office-addin](https://abap2ui5-addons.github.io/office-addin/).
+
 > **Status: proof of concept.** CI proves the host page, the embedded app and
 > the bridge against a stand-in for Office.js. Nobody has run it in a real
 > Excel yet - see [What is tested](#what-is-tested).

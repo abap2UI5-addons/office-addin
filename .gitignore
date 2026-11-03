@@ -7,3 +7,7 @@ test/e2e/.build/
 test/e2e/.deps/
 /manifest.xml
 dist/
+site/node_modules/
+site/.vitepress/cache/
+site/.vitepress/dist/
+build/
