@@ -48,9 +48,9 @@ export const DEFAULTS = {
   description: "abap2UI5 apps of your SAP system next to the workbook.",
   provider: "abap2UI5",
   button: "abap2UI5",
-  supportUrl: "https://github.com/abap2UI5/office-addin",
+  supportUrl: "https://github.com/abap2UI5-addons/office-addin",
   icons:
-    "https://raw.githubusercontent.com/abap2UI5/office-addin/main/manifest/icons/",
+    "https://raw.githubusercontent.com/abap2UI5-addons/office-addin/main/manifest/icons/",
   out: "manifest.xml",
 };
 
@@ -157,7 +157,8 @@ function limit(value, max, what) {
 
 // A stable id for a stable target: the same host, page and app give the
 // same add-in, so a manifest written again replaces the installed one
-// instead of adding a second. Shaped as a version 5 UUID.
+// instead of adding a second. Shaped as a version 5 UUID. The prefix of the
+// seed is the repository's first home - it stays, or every id changes.
 export function stableId(seed) {
   const h = createHash("sha1")
     .update(`abap2UI5/office-addin:${seed}`)

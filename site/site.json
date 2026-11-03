@@ -1,0 +1,5 @@
+{
+  "repo": "office-addin",
+  "title": "abap2UI5 for Excel",
+  "description": "Show an app in Excel's task pane and read and write the workbook."
+}

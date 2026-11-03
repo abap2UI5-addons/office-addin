@@ -15,10 +15,9 @@ export default [
   {
     ignores: [
       "**/node_modules/**",
-      // the generated BSP (scripts/build-bsp.mjs) and the vendored control
+      // the generated BSP (scripts/build-bsp.mjs)
       "src/**",
       "dist/**",
-      "test/e2e/vendor/**",
       "test/e2e/.build/**",
       "test/e2e/.deps/**",
       "test-results/**",

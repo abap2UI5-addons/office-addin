@@ -41,16 +41,14 @@ async function open(
   return problems;
 }
 
-// Where z2ui5.cc.ExcelBridge came from: the frontend bundle of the runtime,
-// or - with a runtime older than abap2UI5 #2847 - the vendored copy the
-// server answers resources/z2ui5/cc/ExcelBridge.js with (test/e2e/server.mjs).
-// E2E_BRIDGE=bundle makes a run against a runtime that has the control fail
-// when the copy was used.
+// z2ui5.cc.ExcelBridge comes with the frontend bundle of the runtime
+// (abap2UI5 1.147.0 and later). UI5 asks for resources/z2ui5/cc/ExcelBridge.js
+// as a file only when the bundle does not define it - the run fails then.
 function watchBridge(page) {
-  const seen = { vendored: false };
+  const seen = { requested: false };
   page.on("request", (r) => {
     if (r.url().endsWith("/resources/z2ui5/cc/ExcelBridge.js"))
-      seen.vendored = true;
+      seen.requested = true;
   });
   return seen;
 }
@@ -66,13 +64,7 @@ test("boots in Excel and renders the embedded app", async ({ page }) => {
   await expect(page.locator('[id$="--followSwitch"]')).not.toHaveClass(
     /sapMSwtDisabled/,
   );
-  test.info().annotations.push({
-    type: "ExcelBridge",
-    description: bridge.vendored
-      ? "vendored copy (test/e2e/vendor)"
-      : "frontend bundle",
-  });
-  if (process.env.E2E_BRIDGE === "bundle") expect(bridge.vendored).toBe(false);
+  expect(bridge.requested).toBe(false);
   await expect(page.getByText("Gearbox GX-400")).toBeVisible();
   await expect(page.locator("#z2ui5xl-message")).toBeHidden();
   // office_init.js put back what Office.js took away

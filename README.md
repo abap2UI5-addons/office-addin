@@ -11,6 +11,8 @@ This is a **source repository** (abap2UI5 CONVENTIONS §1): you edit here, CI
 checks every change. It holds the host page as a BSP application to pull
 with abapGit, a demo app, the manifest generator and the tests.
 
+> Part of [abap2UI5-addons](https://github.com/abap2UI5-addons) - addons and apps for [abap2UI5](https://github.com/abap2UI5/abap2UI5), installed with [abapGit](https://abapgit.org). Documentation: [abap2ui5-addons.github.io/office-addin](https://abap2ui5-addons.github.io/office-addin/).
+
 > **Status: proof of concept.** CI proves the host page, the embedded app and
 > the bridge against a stand-in for Office.js. Nobody has run it in a real
 > Excel yet - see [What is tested](#what-is-tested).
@@ -61,13 +63,10 @@ reverse proxy that puts both under one host ([Without a BSP](#without-a-bsp)).
 
 ## Requirements
 
-- **abap2UI5 with `z2ui5.cc.ExcelBridge`** - abap2UI5 pull request #2847,
-  on abap2UI5 `main` since commit bcce7d6. Until a release contains it (the
-  first after 1.146.0 whose `changelog.txt` lists the control), install
-  abap2UI5 from `main`. With an older
+- **abap2UI5 1.147.0 or later** - the first release with the control
+  `z2ui5.cc.ExcelBridge` (abap2UI5 pull request #2847). With an older
   abap2UI5 the demo app's view does not load (`z2ui5/cc/ExcelBridge` is
-  missing). The embed control needs abap2UI5 1.145.0 or later
-  (`?z2ui5-bundle`); this add-in needs the release with #2847 anyway.
+  missing). The embed control alone would need 1.145.0 (`?z2ui5-bundle`).
 - **UI5 1.71 or later** on the system (the floor of abap2UI5 and of the embed
   control). The host page asks for the theme `sap_horizon` (UI5 1.102+);
   below that, write the manifest with `--theme sap_fiori_3`.
@@ -408,12 +407,9 @@ selection events) beyond what the stub models; logon in the task pane;
 `frame-ancestors` and cookies in Excel on the web; the ICM rewrite example;
 the approuter example; the icons through Office's cache; central deployment.
 
-The smoke test runs on `@abap2ui5/node-runtime` 1.146.0, which predates
-`z2ui5.cc.ExcelBridge`: the test server then answers the control's module
-with a copy (`test/e2e/vendor/ExcelBridge.js`, from the commit of #2847).
-With a runtime that has the control, the copy is never asked for -
-`E2E_BRIDGE=bundle npm run e2e` makes sure of it (see
-[Development](#development)).
+The smoke test runs on `@abap2ui5/node-runtime`, whose frontend bundle
+brings `z2ui5.cc.ExcelBridge` (1.147.0 and later); the test fails when UI5
+has to ask for the control as a file of its own.
 
 ## Development
 
@@ -433,7 +429,7 @@ npm run e2e:serve    # the test server, to look at: http://127.0.0.1:4310/
 - Against an abap2UI5 checkout instead of the npm runtime: in abap2UI5,
   `npm run pack:node-runtime`; here,
   `npm i --no-save <abap2UI5>/npm-package/abap2ui5-node-runtime-<v>.tgz @abaplint/transpiler-cli@<the version its package.json names>`,
-  then `npm run e2e:build && E2E_BRIDGE=bundle npm run e2e` (and `npm ci`
+  then `npm run e2e:build && npm run e2e` (and `npm ci`
   afterwards).
 
 AGENTS.md has the rules for changes; `changelog.txt` the history.
