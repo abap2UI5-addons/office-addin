@@ -64,5 +64,8 @@
     "skip": {
       "@openui5/sap.m": "the UI5 1.136 of the smoke test, AGENTS.md Pins"
     }
+  },
+  "overrides": {
+    "minimatch": "^11.0.4"
   }
 }
