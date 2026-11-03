@@ -86,7 +86,8 @@ reverse proxy that puts both under one host ([Without a BSP](#without-a-bsp)).
 
 1. **Pull this repository with abapGit** into a package of its own (for
    example `$Z2UI5_XL`, or a transportable `Z2UI5_XL`), on the system that
-   runs abap2UI5. It brings
+   runs abap2UI5 - branch `main`, or on NetWeaver 7.02 - 7.40 the branch
+   `702`, downported automatically from `main` on every push. It brings
    - `Z2UI5_CL_XL_DEMO` - the demo app (`src/01`),
    - the BSP application `Z2UI5_XL` - the host page and the embed control
      (`src/02`, generated - see [Development](#development)),
