@@ -1,4 +1,4 @@
-# abap2UI5 for Excel
+# Excel Add-in
 
 **abap2UI5 apps in Microsoft Excel**: an Office add-in that shows an
 [abap2UI5](https://github.com/abap2UI5/abap2UI5) app in Excel's task pane -
