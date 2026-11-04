@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "abap2UI5 for Excel"
+  name: "Excel Add-in"
   text: "Show an app in Excel's task pane and read and write the workbook."
   image:
     src: /logo.svg
