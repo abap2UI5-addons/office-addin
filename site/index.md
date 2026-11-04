@@ -5,8 +5,8 @@ hero:
   name: "abap2UI5 for Excel"
   text: "Show an app in Excel's task pane and read and write the workbook."
   image:
-    src: /favicon.png
-    alt: abap2UI5
+    src: /logo.svg
+    alt: abap2UI5 addons
   actions:
     - theme: brand
       text: Get started
