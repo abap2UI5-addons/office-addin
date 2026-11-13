@@ -3,7 +3,7 @@
 // (office-addin-manifest, the package of `office-addin-manifest validate`)
 // reads the fields Office needs, the elements stand in the order the schema
 // prescribes, every resid resolves, and the options are checked. The
-// validation service itself (online) runs in CI - .github/workflows/ci.yaml,
+// validation service itself (online) runs in CI - .github/workflows/check-addin.yaml,
 // job manifest.
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -186,12 +186,23 @@ test("refuses what Office or the host page would refuse", () => {
     [["--host", HOST, "--param", "app=X"], /are taken/],
     [["--host", HOST, "--app-domain", "http://idp.example"], /not https/],
     [["--host", HOST, "--icons", "http://cdn.example/"], /not https/],
-    [["--host", HOST, "--name", "x".repeat(126)], /1 to 125/],
+    // the name also goes into GetStarted.Title "<name> is ready" (125)
+    [["--host", HOST, "--name", "x".repeat(117)], /1 to 116/],
     [["--host", HOST, "--bogus", "1"], /unknown option/],
   ];
   for (const [args, message] of bad) {
     assert.throws(() => build(args), message, args.join(" "));
   }
+});
+
+test("the longest name still fits the ShortString of GetStarted.Title", async () => {
+  const { xml } = build(["--host", HOST, "--name", "x".repeat(116)]);
+  const doc = await xml2js.parseStringPromise(xml);
+  const strings =
+    doc.OfficeApp.VersionOverrides[0].Resources[0]["bt:ShortStrings"][0][
+      "bt:String"
+    ];
+  for (const s of strings) assert.ok(s.$.DefaultValue.length <= 125, s.$.id);
 });
 
 test("defaults are the BSP of this repository and the demo app", () => {
