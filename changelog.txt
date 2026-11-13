@@ -12,6 +12,7 @@ Legend
 
 unreleased
 ----------
+* npm run manifest: a --name of 117 to 125 characters wrote a manifest Microsoft's validation refuses - the name also stands in GetStarted.Title ("<name> is ready", at most 125 characters), so --name now takes at most 116
 ! npm run manifest: the default support URL and icon folder point at github.com/abap2UI5-addons/office-addin, where the repository lives now (the add-in id stays the same)
 * README: the recommended frame-ancestors list admitted every Microsoft 365 tenant (*.sharepoint.com) - it now says to name your own tenant's SharePoint hosts, since with SameSite=None cookies any tenant's page could frame the task pane with the user's SAP session
 * The BSP Z2UI5_XL failed to import (CL_O2_API_PAGES=>CREATE_NEW_PAGE invalid_name): history-cache.js and office-init.js are now history_cache.js and office_init.js - a BSP page name takes no hyphen

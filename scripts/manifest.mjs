@@ -61,6 +61,9 @@ const VERSION = /^\d{1,5}(\.\d{1,5}){0,3}$/;
 // the length limits of the manifest schema: ShortString 125, LongString 250
 const SHORT = 125;
 const LONG = 250;
+// the template's GetStarted.Title is "{{NAME}} is ready" - a ShortString as
+// well, so the name has to leave room for the suffix
+const GET_STARTED_SUFFIX = " is ready";
 
 const MULTI = new Set(["param", "app-domain"]);
 const KNOWN = new Set([
@@ -250,7 +253,11 @@ export function buildManifest(opts) {
     ID: id,
     VERSION: version,
     PROVIDER: limit(opts.provider || DEFAULTS.provider, SHORT, "--provider"),
-    NAME: limit(opts.name || DEFAULTS.name, SHORT, "--name"),
+    NAME: limit(
+      opts.name || DEFAULTS.name,
+      SHORT - GET_STARTED_SUFFIX.length,
+      "--name",
+    ),
     DESCRIPTION: limit(
       opts.description || DEFAULTS.description,
       LONG,

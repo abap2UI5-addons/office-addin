@@ -7,3 +7,6 @@ test-results/
 playwright-report/
 .abaplint-deps/
 dist/
+# the documentation site - the same files in every addon (site/.vitepress/
+# config.mts says so), formatted where they come from, not here
+site/
